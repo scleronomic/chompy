@@ -1,6 +1,4 @@
 import numpy as np
-
-from Justin import parameter_torso as jtp
 from Kinematic import forward
 
 from Optimizer.path import d_steplength__dx, combine_d_substeps__dx
@@ -154,11 +152,7 @@ def oc_check(x_spheres, oc, verbose=1):
     if verbose > 0:
         for i in range(np.size(feasible)):
             if not feasible[i] or verbose > 2:
-                try:  # FIXME cleaner, write general function
-                    oc_info = jtp.get_frame_name(jtp.SPHERES_FRAME_IDX[oc.active_spheres][d_idx[i]])
-                except IndexError:
-                    oc_info = f"Sphere {d_idx[i]}"
-
+                oc_info = f"Sphere {d_idx[i]}"
                 print('Minimal Obstacle Distance:  ({})={:.4}m  -> Feasible: {}'.format(
                     oc_info, d[i], feasible[i]))
 
