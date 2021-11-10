@@ -47,7 +47,7 @@ class DraggablePatch:
         raise NotImplementedError
 
     def apply_limits(self, xy):
-        if self.limits is not None and self.limits is not (None, None):
+        if self.limits is not None and self.limits != (None, None):
             return np.clip(xy, a_min=self.limits[:, 0], a_max=self.limits[:, 1])
         else:
             return xy

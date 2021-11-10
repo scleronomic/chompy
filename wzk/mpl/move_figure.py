@@ -7,7 +7,7 @@ except ModuleNotFoundError:
     monitors = [[1440, 900]]
 if screeninfo is not None:
     try:
-        monitors = [(m.fig_width_inch, m.height) for m in screeninfo.get_monitors()]
+        monitors = [(m.width, m.height) for m in screeninfo.get_monitors()]
     except screeninfo.common.ScreenInfoError:
         # Fallback for my mac
         # monitors = [[2560, 1600]]

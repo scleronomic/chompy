@@ -1,11 +1,11 @@
 import numpy as np
 
-from Kinematic.Robots import SingleSphere02, StaticArm, MovingArm
+from Kinematic.Robots import SingleSphere02, StaticArm
 
 
 radius = 0.3
-# robot = SingleSphere02(radius=0.3)  # Size of the robot [m]
-robot = StaticArm(n_dof=5, limb_lengths=0.4, radius=0.1)
+robot = SingleSphere02(radius=0.3)  # Size of the robot [m]
+# robot = StaticArm(n_dof=5, limb_lengths=0.4, radius=0.1)
 
 # Sample random configurations
 q = robot.sample_q(10)

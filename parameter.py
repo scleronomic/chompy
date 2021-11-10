@@ -98,7 +98,7 @@ class ObstacleCollision(object):
         'img',                     #
         'spheres_rad',             #
         'active_spheres',          # bool[n_spheres]  | Indicates which spheres are active for collision
-        'n_substeps',         # int              | Number of substeps used in the cost function
+        'n_substeps',              # int              | Number of substeps used in the cost function
         'n_substeps_check',        # int              | Number of substeps used in its derivative
         'dist_fun',                # fun()            |
         'dist_grad',               # fun()            |

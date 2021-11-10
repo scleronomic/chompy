@@ -22,12 +22,12 @@ n_voxels = (64, 64)
 
 par.robot.limits = world_limits
 
-n_waypoints = 10  # number of the discrete way points of the trajectory
-par.oc.n_substeps = 3  # number of sub steps to check for obstacle collision
+n_waypoints = 20  # number of the discrete way points of the trajectory
+par.oc.n_substeps = 5  # number of sub steps to check for obstacle collision
 
 # Gradient Descent
 gd = GradientDescent()
-gd.n_steps = 50
+gd.n_steps = 100
 gd.step_size = 0.001
 gd.adjust_step_size = True
 gd.grad_tol = np.full(gd.n_steps, 1)
@@ -47,7 +47,7 @@ get_q0 = initial_guess.q0_random_wrapper(robot=par.robot, n_multi_start=n_multi_
 # Choose sample start and goal point of the motion problem
 q_start, q_end = np.array([[[1, 1]]]), np.array([[[9, 9]]])
 
-# Get initial guesses for given start and end
+# Get initial guesses for given start and end / ms = multistarts
 q_ms = get_q0(start=q_start, end=q_end)
 
 #####
@@ -56,20 +56,14 @@ q_ms, objective = gradient_descent.gd_chomp(q0=q_ms, q_start=q_start, q_end=q_en
 
 
 # Choose the optimal trajectory from all multi starts
+q_ms = path.x_inner2x(inner=q_ms, start=q_start, end=q_end)
 q_opt, _ = choose_optimum.get_feasible_optimum(q=q_ms, par=par, verbose=2)
-q_opt = path.x_inner2x(inner=q_opt, start=q_start, end=q_end)
 
 
 # Plot multi starts and optimal solution
 fig, ax = plotting.new_world_fig(limits=par.world.limits, title='Multi-Starts')
 plotting.plot_img_patch_w_outlines(img=par.oc.img, limits=par.world.limits, ax=ax)
 for q in q_ms:
-    plotting.plot_x_path(x=q, r=par.robot.spheres_rad, ax=ax, marker='o',)
+    plotting.plot_x_path(x=q, r=par.robot.spheres_rad, ax=ax, marker='o', alpha=0.5)
 
 plotting.plot_x_path(x=q_opt, r=par.robot.spheres_rad, ax=ax, marker='o', color='k')
-
-
-#
-(length_cost, collision_cost), (length_jac, collision_jac) = chomp.chomp_grad(q=q_ms, par=par, jac_only=False,
-                                                                              return_separate=True)
-# plt.show()
