@@ -121,7 +121,6 @@ def oc_cost_w_length_grad(x_spheres, dx_dq, oc,
 
     #                v'        *        l
     jac += o_jac * x_spheres_step_length
-    # FIXME magnitudes smaller than v*l' ? ssl_jac is always around 1 but x_spheres_step_length depends on bee_length
 
     jac = (dx_dq * jac[..., np.newaxis, :, :]).sum(axis=(-2, -1))
 

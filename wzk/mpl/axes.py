@@ -103,7 +103,6 @@ def set_ax_limits(ax, limits, n_dim=2):
 
 
 def add_safety_limits(limits, factor):
-    # TODO might be better of in arrays?
     limits = np.atleast_1d(limits)
     diff = np.diff(limits, axis=-1)[..., 0]
     return np.array([limits[..., 0] - factor * diff,

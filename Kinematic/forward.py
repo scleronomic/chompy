@@ -193,8 +193,6 @@ def combine_frames(f, prev_frame_idx):
         f[..., i, :, :] = f[..., pfi, :, :] @ f[..., i, :, :]
 
 
-# TODO make this simpler by working just with the DH values here and combine coupled / passive joints in a separate layer
-#   should make it easier to understand and also faster for the majority of 2d usecases
 def combine_frames_jac(j, d, robot):
     n_dof = j.shape[-4]
     jf_all, jf_first, jf_last = kc.__get_joint_frame_indices_first_last(jfi=robot.joint_frame_idx)
@@ -309,7 +307,6 @@ def get_torques(f,
                 mass, mass_pos, mass_frame_idx,
                 gravity=None,
                 mode='f'):
-    # Finding the torque about a given axis does not depend on the specific location on the axis where the torque acts
 
     *shape, n_frames, _, _ = f.shape
 

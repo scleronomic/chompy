@@ -285,7 +285,7 @@ def get_combined_faces(img):
     return combine_faces(face_vtx=face_vtx)
 
 
-# Rectangles  # TODO do not fit quite in this method, the rest is so clean and without connections
+# Rectangles
 def rectangles2face_vertices(rect_pos, rect_size):
     """
     Get the faces of the obstacles in 3D. It's cheaper to plot the faces instead of the whole volumes

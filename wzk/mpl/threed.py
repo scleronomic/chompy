@@ -7,7 +7,6 @@ from wzk.mpl.figure import save_fig
 def save_different_views_3d(*, ax, fig_name, azim_lim=(0, 270), elev_lim=(45, 45),
                             n=None, n_azim=None, n_elev=None):
     """https://github.com/matplotlib/matplotlib/issues/1077/"""
-    # TODO option to save as gif (FuncAnimation)
     n_azim = n if n is None else n_azim
     n_elev = n if n is None else n_elev
 

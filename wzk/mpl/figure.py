@@ -53,7 +53,7 @@ def new_fig(*, width=ieee2c[0], height=None, h_ratio=1/golden_ratio,
             ax.set_aspect(aspect)
 
     else:
-        import mpl_toolkits.mplot3d.art3d as art3d  # noqa: F401 unused import
+        import mpl_toolkits.mplot3d.art3d as art3d  # noqa
         ax = fig.gca(projection='3d')
 
     if title is not None:

@@ -21,7 +21,6 @@ __n_dim2rot_mode_default_dict = {1: __2d_theta,
                                  3: __3d_rotvec,
                                  # 3: __3d_euler,
                                  4: __3d_quat}
-# TODO theta has its own 1 dimension !!! make it consistent
 
 __rot2n_dim_dict = {1: 2,
                     2: 2,

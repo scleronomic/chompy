@@ -2,13 +2,6 @@ import numpy as np
 import scipy.ndimage as ndimage  # Image interpolation
 
 
-# Finding Use voxel_size + lower_left as inputs instead of using limits and inferring those values
-#  The advantage of voxel_size + lower_left as argument is that voxel_size is a scalar and lower_left can be omitted in
-#  most of the cases so the standard signature is much more concise,
-#  the trade off is that some functions have now two parameters instead of just one
-#  Additionally limits has always 2*n_dim dimensions
-
-
 # Obstacle Image to Distance Image
 def obstacle_img2dist_img(img, voxel_size, add_boundary=True):
     """

@@ -262,7 +262,7 @@ def d_substeps__dx(n, order=0):
         jac = (np.arange(start=n - 1, stop=-1, step=-1) / n)[np.newaxis, :].repeat(2, axis=0)
         jac[0, :] = 1 - jac[0, :]
 
-    # jac /= n_substeps  # FIXME sum = 1, the influence of the substeps on the waypoints is independent from its numbers
+    # jac /= n_substeps
     # Otherwise the center would always be 1, no matter how many substeps -> better this way
     # print('substeps normalization')
     return jac

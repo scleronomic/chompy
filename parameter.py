@@ -149,7 +149,7 @@ class PlanningType(object):
                  'length',              # bool |
                  'center_of_mass',      # bool |
                  'tcp',                 # bool |
-                 # 'base_rotation',       # bool | TODO can be expressed as tcp, the head frame should point in the general direction of the goal
+                 # 'base_rotation',       # bool |
                  # 'include_start',       # bool |  Start is always fixed, even in the context of MPC, the start of the
                  #                               | next planning horizon is given, otherwise it becomes to convoluted
                  'include_end'          # bool |
@@ -201,7 +201,6 @@ class Weighting(CopyableObject):
             setattr(self, v, x[i:j])
 
     def at_idx(self, i):
-        # TODO cleaner
         new_weighting = self.copy()
         for v in ['length', 'collision']:
             self.__at_idx(v=v, i=i)

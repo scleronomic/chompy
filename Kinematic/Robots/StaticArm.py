@@ -75,7 +75,6 @@ class StaticArm(Robot):
 
 class StaticTree(Robot):
 
-    # TODO make this easier usable, make it as close to par as possible
     def __init__(self):
         self.next_frame_idx = [1, [2, 4], 3, -1, 5, -1]
         self.prev_frame_idx = chain.next2prev_frame_idx(nfi=self.next_frame_idx)
@@ -116,8 +115,6 @@ def _fill_jacs(j,
                sin, cos,
                joint_frame_idx):
     n_dof = j.shape[-4]
-    # TODO if joint_frame_idx is not a slice, the view wont work, restructure for the more general case
-    #   not efficient in this way, --> restructure
     for i in range(n_dof):
         frames.fill_frames_jac_2d_sc(j=j[..., i, joint_frame_idx[i], :, :], sin=sin[..., i], cos=cos[..., i])
 

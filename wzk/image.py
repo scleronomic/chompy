@@ -1,7 +1,7 @@
 import zlib  # Image compression
 import numpy as np
 from scipy.signal import convolve2d
-from skimage.io import imread, imsave  # noqa: F401 unused import
+from skimage.io import imread, imsave # noqa
 
 from wzk.dicts_lists_tuples import tuple_extract
 from wzk.numpy2 import align_shapes, get_cropping_indices, flatten_without_last, initialize_array
@@ -104,7 +104,6 @@ def block_collage(*, img_arr, inner_border=None, outer_border=None, fill_boarder
 
 def reduce_n_voxels(img, n_voxels, n_dim, n_channels, kernel, pooling_type='average', n_samples=None,
                     sample_dim=False, channel_dim=False):
-    # TODO use scipy method
     # https://stackoverflow.com/questions/59988649/indexing-numpy-array-with-list-of-slices
     # n_voxels_new = 3
     # for o in range(n_voxels_new):

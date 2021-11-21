@@ -20,7 +20,7 @@ def __get_adaptive_step_size(x, x_old, df_dx, df_dx_old,
     else:
         diff_x = np.abs(x - x_old)
         diff_grad = np.abs(df_dx - df_dx_old)
-        diff_grad_squared_sum = (diff_grad ** 2).sum(axis=(-2, -1))  # TODO this summation is not general
+        diff_grad_squared_sum = (diff_grad ** 2).sum(axis=(-2, -1))
         const_ss_idx = diff_grad_squared_sum == 0
         diff_grad_squared_sum[const_ss_idx] = 1
 
@@ -113,5 +113,5 @@ def gd_chomp(q0, q_start, q_end,
     gd.prune_limits = par.robot.prune_joints2limits
     res = gradient_descent_wrapper_mp(q0, fun=fun, grad=grad, gd=gd)
 
-    par.weighting = weighting.copy()  # TODO
+    par.weighting = weighting.copy()
     return res

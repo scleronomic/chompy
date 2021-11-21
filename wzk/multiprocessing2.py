@@ -7,12 +7,6 @@ from time import sleep
 from wzk import change_tuple_order
 
 
-# FINDING h5py objects can not be pickled
-#   -> read the files inside the function instead / h5py objects are only references anyway
-#   Joblib: Threading backend allows shared memory
-
-# FINDING
-
 def n_processes_wrapper(n_processes, n_samples):
     return min(max(1, n_processes), n_samples)
 
@@ -52,8 +46,8 @@ def mp_wrapper(*args, fun, n_processes=1, max_chunk_size=None, __debug_loop=Fals
     - max_chunk_size is intended for cases where both a loop + parallelization is needed because of memory limitations
     """
 
-    time_sleep = 0.01  # s # TODO smaller time ?
-    time_sleep2 = 0.01  # s # TODO smaller time ?
+    time_sleep = 0.01  # s
+    time_sleep2 = 0.01  # s
 
     if len(args) == 0:
         n_samples = n_processes
