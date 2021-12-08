@@ -21,7 +21,7 @@ def box_constraints_limits_check(x, limits):
     return feasible
 
 
-def feasibility_check(q, par):
+def feasibility_check(q, par, verbose=0):
     n_samples = q.shape[0]
 
     frames, x_spheres = forward.get_x_spheres_substeps(q=q, robot=par.robot, n=par.oc.n_substeps_check,
@@ -29,7 +29,7 @@ def feasibility_check(q, par):
 
     # Obstacle Collision
     if par.check.obstacle_collision:
-        feasible_oc = oc_check(x_spheres=x_spheres, oc=par.oc)
+        feasible_oc = oc_check(x_spheres=x_spheres, oc=par.oc, verbose=verbose)
     else:
         feasible_oc = np.ones(n_samples, dtype=bool)
 

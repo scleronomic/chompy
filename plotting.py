@@ -132,15 +132,17 @@ def plot_spheres(q, robot,
                  **kwargs):
     x = robot.get_x_spheres(q=q)
     x = x.reshape((-1, x.shape[-1]))
-    h = __plot_circles(h=h, ax=ax, x=x, r=robot.spheres_rad, **kwargs)
+    h = plot_circles(h=h, ax=ax, x=x, r=robot.spheres_rad, **kwargs)
     return h
 
 
-def __plot_circles(x, r,
-                   ax=None, h=None,
-                   color=None, alpha=None,
-                   **kwargs):
-    r = safe_scalar2array(r, shape=len(x))
+def plot_circles(x, r,
+                 ax=None, h=None,
+                 color=None, alpha=None,
+                 **kwargs):
+    # https://stackoverflow.com/questions/48172928/scale-matplotlib-pyplot-axes-scatter-markersize-by-x-scale
+    x = np.reshape(x, (-1, 2))
+    r = scalar2array(r, shape=len(x))
 
     if h is None:
         h = []
