@@ -52,4 +52,4 @@ def _fill_frames_jac__dx(j, n_dim):
     Assume that the dof xy(z) are the first 2(3)
     """
     for i in range(n_dim):
-        j[:, :, i, :, i, -1] = 1
+        j[..., i, :, i, -1] = 1
