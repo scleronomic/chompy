@@ -14,8 +14,8 @@ robot = StaticArm(n_dof=3, limb_lengths=0.5, radius=0.1)
 par = Parameter(robot=robot, obstacle_img=None)
 
 # TODO if you uncomment this, it fails
-# par.world.limits = np.array([[-2, 2],
-#                              [-2, 2]])
+par.world.limits = np.array([[-2, 2],
+                             [-2, 2]])
 
 
 # Sample random configurations

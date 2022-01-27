@@ -39,7 +39,7 @@ class StaticArm(Robot):
         self.n_dof = n_dof
 
         self.f_world_robot = None
-        self.infinity_joints = np.ones(self.n_dof, dtype=bool)
+        self.infinity_joints = np.zeros(self.n_dof, dtype=bool)
         self.limits = np.repeat(np.array([[-np.pi, np.pi]]), self.n_dof, axis=0)
 
         self.limb_lengths = limb_lengths
