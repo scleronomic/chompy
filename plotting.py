@@ -162,3 +162,13 @@ def plot_circles(x, r,
             if color is not None:
                 h_i.set_color(color)
         return h
+
+
+def plot_arm(ax, q, robot, **kwargs):
+    f = robot.get_frames(q)
+
+    xy = f[..., :-1, :2, -1]
+    uv = f[..., :-1, :2, 0] * robot.limb_lengths
+
+    h = quiver(ax=ax, xy=xy, uv=uv, headwidth=1, headlength=0, **kwargs)
+    return h

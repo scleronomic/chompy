@@ -259,7 +259,7 @@ def initialize_oc(oc, world, robot,
         obstacle_img = templates.create_template(n_voxels=world.n_voxels, world=obstacle_img)
 
     try:
-        a = oc.active_spheres
+        _ = oc.active_spheres
     except AttributeError:
         oc.active_spheres = np.ones(len(robot.spheres_rad), dtype=bool)
 
@@ -267,12 +267,11 @@ def initialize_oc(oc, world, robot,
     oc.img = obstacle_img
 
     oc.dist_fun, oc.dist_grad = \
-        obstacle_distance\
-            .obstacle_img2funs(img=obstacle_img, add_boundary=True,
-                               dist_img=dist_img, dist_img_grad=dist_img_grad,
-                               voxel_size=world.voxel_size, lower_left=world.limits[:, 0],
-                               interp_order_dist=oc.edt_interp_order_cost,
-                               interp_order_grad=oc.edt_interp_order_grad)
+        obstacle_distance.obstacle_img2funs(img=obstacle_img, add_boundary=True,
+                                            dist_img=dist_img, dist_img_grad=dist_img_grad,
+                                            voxel_size=world.voxel_size, lower_left=world.limits[:, 0],
+                                            interp_order_dist=oc.edt_interp_order_cost,
+                                            interp_order_grad=oc.edt_interp_order_grad)
 
     return obstacle_img
 

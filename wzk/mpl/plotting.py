@@ -191,6 +191,21 @@ def draw_lines_between(*, x1=None, x2=None, y1, y2, ax=None, **kwargs):
     return cl
 
 
+def quiver(xy, uv,
+           ax=None, h=None,
+           **kwargs):
+
+    if h is None:
+        h = ax.quiver(xy[..., 0].ravel(), xy[..., 1].ravel(), uv[..., 0].ravel(), uv[..., 1].ravel(),
+                      angles='xy', scale=1, units='xy', scale_units='xy',
+                      **kwargs)
+    else:
+        h.set_offsets(xy)
+        h.set_UVC(*uv.T)
+
+    return h
+
+
 # Grid
 def grid_lines(ax, start, step, limits, **kwargs):
     mins, maxs = limits4axes(limits=limits, n_dim=2)
