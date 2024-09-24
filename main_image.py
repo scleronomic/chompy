@@ -1,4 +1,3 @@
-import numpy as np
 import matplotlib.pyplot as plt
 
 from GridWorld.random_obstacles import create_rectangle_image, create_perlin_image
@@ -26,3 +25,5 @@ dist_img = obstacle_img2dist_img(img=img, voxel_size=1/64, )
 plt.figure()
 plt.imshow(dist_img, origin='lower')
 plt.show()
+
+imgs = create_perlin_image(n_voxels=(64, 64), n=100, res=4, threshold=0.5)

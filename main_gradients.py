@@ -40,6 +40,9 @@ initialize_oc(oc=par.oc, world=par.world, robot=par.robot, obstacle_img=img)
                                                                         return_separate=True)
 
 
-
+print(length_cost)
+print(length_jac.shape)
+print(collision_cost)
+print(collision_jac.shape)
 
 

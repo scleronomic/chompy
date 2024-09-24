@@ -67,7 +67,10 @@ class SDF:
             self.circles.set_xy(xy=xy + self.gd_step_size * jac)  # Gradient Descent on the Signed Distance Field
 
         for ani in self.anis:
-            ani.event_source.stop()
+            try:
+                ani.event_source.stop()
+            except AttributeError:
+                pass
             self.anis.remove(ani)
             del ani
 

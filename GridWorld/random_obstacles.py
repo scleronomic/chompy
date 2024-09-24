@@ -23,7 +23,7 @@ def create_rectangles(*, n, size_limits=(1, 10), n_voxels=(64, 64),
             rect_pos[:, d] = np.random.randint(low=0, high=n_voxels[d] - size_limits[0] + 1, size=n)
         rect_size = np.random.randint(low=size_limits[0], high=size_limits[1] + 1, size=(n, n_dim))
 
-        if special_dim is not None and special_dim is not (None, None):
+        if special_dim is not None and special_dim != (None, None):
             dimensions, size = special_dim
             if isinstance(dimensions, int):
                 dimensions = (dimensions,)

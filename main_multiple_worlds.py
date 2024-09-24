@@ -1,3 +1,5 @@
+import numpy as np
+
 from Kinematic.Robots import SingleSphere02
 from Optimizer import chomp
 
@@ -13,11 +15,11 @@ par = Parameter(robot=robot, obstacle_img=None)
 for world in world_list:
     initialize_oc(oc=par.oc, world=par.world, robot=par.robot, obstacle_img=world)
     q = par.robot.sample_q()
-    chomp.chomp_grad(q, par=par)
+    chomp.chomp_grad(q[np.newaxis, np.newaxis, :], par=par)
 
 # Option B:
 par_list = [Parameter(robot=robot, obstacle_img=w) for w in world_list]
 for par in par_list:
     q = par.robot.sample_q()
-    chomp.chomp_grad(q, par=par)
+    chomp.chomp_grad(q[np.newaxis, np.newaxis, :], par=par)
     

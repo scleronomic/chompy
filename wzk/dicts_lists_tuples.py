@@ -1,5 +1,4 @@
 import json
-import argparse
 import collections
 import numpy as np
 
@@ -233,7 +232,7 @@ def element_at_depth_gen(lst, depth=0, with_index=False, __cur_depth=0):
 
     for i, el in enumerate(lst):
 
-        if isinstance(el, collections.Iterable) and not isinstance(el, (str, bytes)):
+        if isinstance(el, collections.abc.Iterable) and not isinstance(el, (str, bytes)):
             __cur_depth += 1
             if __cur_depth < depth:
                 # better yield from ...

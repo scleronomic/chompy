@@ -129,10 +129,9 @@ def safe_scalar2array(*val_or_arr, shape, squeeze=True):
 
     res = []
     for voa in val_or_arr:
-        try:
-            voa = np.asscalar(np.array(voa))
+        if np.isscalar(voa):
             res.append(np.full(shape=shape, fill_value=voa, dtype=type(voa)))
-        except ValueError:
+        else:
             assert np.shape(voa) == shape
             res.append(voa)
 
@@ -341,7 +340,7 @@ def find_subarray(a, b):
 
     window = len(b)
     a_window = rolling_window(a=a, window=window)
-    idx = np.nonzero((a_window == b).sum(axis=-1) == window)[0]
+    idx = np.nonzero(np.sum(a_window == b, axis=-1) == window)[0]
     return idx
 
 
