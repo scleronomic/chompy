@@ -39,7 +39,7 @@ def feasibility_check(q, par, verbose=0):
     else:
         feasible_limits = np.ones(n_samples, dtype=bool)
 
-    # Override the status an return the smallest error value
+    # Override the status and return the smallest error value
     status = np.ones(n_samples, dtype=int)
     status[~feasible_limits] = -2
     status[~feasible_oc] = -1

@@ -47,7 +47,7 @@ def np_isinstance(o, c):
     np_isinstance(np.ones(4, dtype=int), float)  # False
     np_isinstance(np.full((4, 4), 'bert'), str)  # True
     """
-    c2np = {bool: np.bool, int: np.integer, float: np.floating, str: np.str}
+    c2np = {bool: bool, int: np.integer, float: np.floating, str: str}
 
     if isinstance(o, np.ndarray):
         c = (c2np[cc] for cc in c) if isinstance(c, tuple) else c2np[c]
@@ -168,8 +168,10 @@ def align_shapes(a, b):
     # -> array([-1, 1, 1, 1, -1, -1])
 
     idx = find_subarray(a=a, b=b)
-    idx = np.asscalar(idx)
+    if not np.isscalar(idx):
+        raise ValueError
 
+    idx = np.ravel(idx)[0]
     aligned_shape = np.ones(len(a), dtype=int)
     aligned_shape[:idx] = -1
     aligned_shape[idx+len(b):] = -1
@@ -265,7 +267,7 @@ def __fill_index_with(idx, axis, shape, mode='slice'):
         idx_with_ = [slice(None) for _ in range(len(shape)-len(axis))]
 
     elif mode == 'orange':
-        idx_with_ = np.ogrid[[range(s) for i, s in enumerate(shape) if i not in axis]]
+        idx_with_ = np.ogrid[*[range(s) for i, s in enumerate(shape) if i not in axis]]
 
     else:
         raise ValueError(f"Unknown mode {mode}")
@@ -308,7 +310,7 @@ def digitize_group(x, bins, right=False):
     """
     https://stackoverflow.com/a/26888164/7570817
     Similar to scipy.stats.binned_statistic but just return the indices corresponding to each bin.
-    Same signature as numpy.digitize
+    Same signature as `numpy.digitize`
     """
     idx_x = np.digitize(x=x, bins=bins, right=right)
     n, m = len(x), len(bins) + 1
@@ -548,7 +550,7 @@ def matsort(mat, order_j=None):
 def idx2boolmat(idx, n=100):
     """
     The last dimension of idx contains the indices. n-1 is the maximal possible index
-    Returns matrix with shape np.shape(idx)[:-1] + (n,)
+    Returns matrix with shape `np.shape(idx)[:-1] + (n, )`
     """
 
     s = np.shape(idx)[:-1]
@@ -732,7 +734,7 @@ def get_points_inbetween(x, extrapolate=False):
 #             res[ii, :, :] = np.dot(A_ii , B_ii)
 #         return res
 #
-#     # At square matices above shape 20 calling BLAS is faster
+#     # At square matrices above shape 20 calling BLAS is faster
 #     if x >= 20 or y >= 20 or z >= 20:
 #         return dot_BLAS
 #     else:

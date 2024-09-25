@@ -38,6 +38,7 @@ class MovingArm(Robot):
         q = xq[..., self.n_dim:]
         return x, q
 
+    @staticmethod
     def x_q2q(self, x, q):
         xq = np.concatenate((x, q), axis=-1)
         return xq
@@ -148,5 +149,3 @@ class Blob03(MovingArm03):
 
 class MovingTree:
     pass
-
-

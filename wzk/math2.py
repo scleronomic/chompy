@@ -1,3 +1,4 @@
+import math
 import numpy as np
 from scipy.stats import norm
 from itertools import product
@@ -231,7 +232,7 @@ def modulo(x, low, high):
 def angle2minuspi_pluspi(x):
     return modulo(x=x, low=-np.pi, high=+np.pi)
     # modulo is faster for larger arrays, for small ones they are similar but arctan is faster in this region
-    #  -> as always you have to make an trade-off
+    #  -> as always you have to make a trade-off
     # return np.arctan2(np.sin(x), np.cos(x))
 
 
@@ -364,7 +365,7 @@ def get_dcm2d(theta):
 
 def distance_line_point(x0, x1, x2):
     """
-    http://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html
+    https://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html
     Distance between x0 and the line defined by {x1 + a*x2}
     """
     return np.linalg.norm(np.cross(x0-x1, x0-x2), axis=-1) / np.linalg.norm(x2-x1, axis=-1)
@@ -381,7 +382,7 @@ def circle_circle_intersection(xy0, r0, xy1, r1):
 
     d = np.linalg.norm(xy1 - xy0)
 
-    # non intersecting
+    # non-intersecting
     if d > r0 + r1:
         return None
     # One circle within other
@@ -496,9 +497,9 @@ def hyper_sphere_volume(n_dim, r=1.):
     """https: // en.wikipedia.org / wiki / Volume_of_an_n - ball"""
     n2 = n_dim//2
     if n_dim % 2 == 0:
-        return (np.pi ** n2) / np.math.factorial(n2) * r**n_dim
+        return (np.pi ** n2) / math.factorial(n2) * r**n_dim
     else:
-        return 2*(np.math.factorial(n2)*(4*np.pi)**n2) / np.math.factorial(n_dim) * r**n_dim
+        return 2*(math.factorial(n2)*(4*np.pi)**n2) / math.factorial(n_dim) * r**n_dim
 
 
 # Clustering
@@ -541,10 +542,9 @@ def test_k_farthest_neighbors():
 
 # Combinatorics
 def binomial(n, k):
-    return np.math.factorial(n) // np.math.factorial(k) // np.math.factorial(n - k)
+    return math.factorial(n) // math.factorial(k) // math.factorial(n - k)
 
 
 def random_subset(n, k, m, dtype=np.uint16):
     assert n == np.array(n, dtype=dtype)
     return np.array([np.random.choice(n, k, replace=False) for _ in range(m)]).astype(np.uint16)
-

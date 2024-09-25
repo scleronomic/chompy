@@ -56,7 +56,7 @@ def chomp_grad(q, par,
         if jac_only:
             return len_jac, oc_jac
         else:
-            return (len_jac[0],oc_jac[0]), (len_jac[1], oc_jac[1])
+            return (len_jac[0], oc_jac[0]), (len_jac[1], oc_jac[1])
 
     else:
 

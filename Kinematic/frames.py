@@ -2,12 +2,12 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 from wzk import random_uniform_ndim, shape_wrapper, max_size, sample_points_on_sphere_3d, noise
 
-# angle axis representation is like a onion, the singularity is the boarder to the next 360 shell
-# 0 is 1360 degree away from the next singularity -> nice
+# angle axis representation is like an onion, the singularity is the boarder to the next 360 shell
+# 0 is 360 degree away from the next singularity -> nice
 
 # Nomenclature
 # matrix ~ SE3 Matrix (3x3)
-# frame ~ (4x4) homogen matrix, SE3 + translation
+# frame ~ (4x4) homogenous matrix, SE3 + translation
 # different representations of rotations
 __2d_theta = '2d_theta'
 __2d_xcos_ysin = '2d_xcos_ysin'
@@ -116,7 +116,7 @@ def matrix2euler(matrix, seq=__euler_angle_seq):
 
 def matrix2quaternions(matrix):
     return Rotation.from_matrix(matrix=matrix.reshape((-1, 3, 3))
-                                ).as_quat().reshape(matrix.shape[:-2] + (4,))
+                                ).as_quat(canonical=True).reshape(matrix.shape[:-2] + (4,))
 
 
 def matrix2rotvec(matrix):
@@ -419,7 +419,7 @@ def frame_from_dh(q, d, theta, a, alpha):
     From wikipedia (https://en.wikipedia.org/wiki/Denavit–Hartenberg_parameters):
         d: offset along previous z to the common normal
         theta: angle about previous z, from old x to new x
-        r: length of the common normal (aka a, but if using this notation, do not confuse with alpha)
+        r: length of the common normal (aka `a`, but if using this notation, do not confuse with alpha)
            Assuming a revolute joint, this is the radius about previous z
         alpha: angle about common normal, from old z axis to new z axis
     """

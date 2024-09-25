@@ -160,7 +160,7 @@ def pooling(mat, kernel, method='max', pad=False):
                    'mean' for mean-pooling.
     <pad>: bool, pad <mat> or not. If no pad, output has shape
            n//f, n being <mat> shape, f being kernel shape.
-           if pad, output has shape ceil(n/f).
+           if padded, output has shape ceil(n/f).
 
     Return <result>: pooled matrix.
     """
@@ -371,7 +371,7 @@ def img2compressed(*, img, n_dim=-1, level=9):
     Compress the given image with the zlib routine to a binary string.
     Level of compression can be adjusted. A timing with respect to different compression levels for decompression showed
     no difference, so the highest level is default, this corresponds to the largest compression.
-    For compression it is slightly slower but this happens just once and not during keras training, so the smaller
+    For compression, it is slightly slower but this happens just once and not during keras training, so the smaller
     needed memory was favoured.
 
     Alternative:
@@ -407,5 +407,3 @@ def compressed2img(img_cmp, n_voxels, n_dim=None, n_channels=None, dtype=bool):
     else:
         return np.fromstring(zlib.decompress(img_cmp), dtype=dtype).reshape(
             image_array_shape(n_voxels=n_voxels, n_dim=n_dim, n_channels=n_channels))
-
-

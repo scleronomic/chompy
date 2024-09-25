@@ -144,7 +144,6 @@ def create_frames_dict_b(f, nfi, ff_inf):
 
 
 def test_create_frames_dict():
-    from wzk import tic, toc
     d, d_b = None, None
     n = 100
     from Kinematic.Robots import StaticArm
@@ -152,8 +151,8 @@ def test_create_frames_dict():
     robot = StaticArm(n_dof=20)
     robot.joint_frame_idx = robot.joint_frame_idx.tolist()
     robot.joint_frame_idx[5] = (5, 7, 9)
+    j, j_b = None, None
 
-    tic()
     for i in range(n):
         f = np.ones((len(robot.next_frame_idx), 4, 4))
         j = np.ones((robot.n_dof, robot.n_frames, 4, 4))
@@ -163,15 +162,12 @@ def test_create_frames_dict():
         for key in d2:
             d[int(key), int(key):] = d2[key][..., 0, 0]
         combine_frames_jac(j=j, d=d2, robot=robot)
-    toc()
 
-    tic()
     for i in range(n):
         f = np.ones((len(robot.next_frame_idx), 4, 4))
         j_b = np.ones((robot.n_dof, robot.n_frames, 4, 4))
         d_b = create_frames_dict_b(f=f, nfi=robot.next_frame_idx, ff_inf=robot.frame_frame_influence)
         combine_frames_jac_b(j=j_b, d=d_b, robot=robot)
-    toc()
 
     # tic()
     # for i in range(n):
@@ -333,6 +329,8 @@ def get_torques(f,
 
     elif mode == 'f':
         f_rot = np.swapaxes(f[..., torque_frame_idx, :3, :3], -1, -2)
+    else:
+        raise ValueError
 
     torques_around_axes = (f_rot @ torques_around_point[..., np.newaxis])[..., 0]
 
@@ -342,27 +340,3 @@ def get_torques(f,
 if __name__ == '__main__':
     # test_create_frames_dict()
     pass
-#
-# q = np.zeros(10)
-#
-#
-# def q2q(q):
-#     # q2 = np.zeros(5)
-#     # for i in range(5):
-#     #     q2[i] = q[2*i] + q[2*i+1]
-#     q2 = np.repeat(q, 2)
-#     return q2
-#
-#
-# def q2q_jac(q):
-#     j = np.zeros((len(q), len(q)*2))
-#     for i in range(len(q)):
-#         j[i, 2*i:2*i+2] = 1
-#
-#
-# q = np.random.random(5)
-# # q2q(np.arange(10))
-#
-# from Robots import StaticArm
-# robot = StaticArm(n_dof=10)
-# # robot.

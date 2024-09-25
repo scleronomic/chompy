@@ -66,7 +66,7 @@ def sample_q_mp(*, robot, shape=None,
                 feasibility_check=False, n_processes=1):
     """
     If valid is False is it faster for values < 1e5 to don't use multiprocessing,
-    On galene there is a overhead of around 10ms for each process you start.
+    On galene there is an overhead of around 10ms for each process you start.
     """
 
     shape = shape_wrapper(shape)

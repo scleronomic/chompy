@@ -4,7 +4,7 @@ from Optimizer import path
 
 def q_cost(q, infinity_joints, joint_weighting):
     """
-    Calculate the squared euclidean distance of each step and sum up over the path and over the joints.
+    Calculate the squared Euclidean distance of each step and sum up over the path and over the joints.
     Consider infinity joints for the step shape calculation and make a weighting between the different joints
     Because the squared step shape is considered it is not necessary to handle cartesian coordinates x,y,z
     differently from the joints.

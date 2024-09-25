@@ -98,7 +98,7 @@ def get_substeps(x, n,
 
     n_samples, n_wp, n_dof = x.shape
 
-    # The only fill in substeps if the the number is greater 1,
+    # The only fill in substeps if the number is greater 1,
     if n <= 1 or n_wp <= 1:
         if include_start:
             return x
@@ -165,7 +165,7 @@ def fill_linear_connection(q, n, infinity_joints, weighting=None):
 # ADDITIONAL FUNCTIONS
 def order_path(x, start=None, end=None, infinity_joints=None, weights=None):
     """
-    Order the points given by 'x' [2d: (n, n_dof)] according to a weighted euclidean distance
+    Order the points given by 'x' [2d: (n, n_dof)] according to a weighted Euclidean distance
     so that always the nearest point comes next.
     Start with the first point in the array and end with the last if 'x_start' or 'x_end' aren't given.
     """
@@ -191,7 +191,7 @@ def order_path(x, start=None, end=None, infinity_joints=None, weights=None):
 
     xi_path[0, 0, :] = start.ravel()
 
-    # Order the points, so that always the nearest is visited next, according to the euclidean distance
+    # Order the points, so that always the nearest is visited next, according to the Euclidean distance
     for i in range(n_waypoints):
         x_diff = np.linalg.norm(inf_joint_wrapper(x - start, inf_bool=infinity_joints), axis=-1)
         i_min = np.argmin(x_diff)
@@ -247,11 +247,11 @@ def d_substeps__dx(n, order=0):
     (n-1)*n_s  # substeps (total)
 
     n_s = 5
-    jac0 = ([[1. , 0.8, 0.6, 0.4, 0.2],  # following step  (including way point (1.))
-             [0. , 0.2, 0.4, 0.6, 0.8]]) # previous step  (excluding way point (1.))
+    jac0 = ([[1.0 , 0.8, 0.6, 0.4, 0.2],  # following step  (including way point (1.))
+             [0.0 , 0.2, 0.4, 0.6, 0.8]]) # previous step  (excluding way point (1.))
 
-    jac1 = ([[0.2, 0.4, 0.6, 0.8, 1. ],  # previous step  (including way point (2.))
-             [0.8, 0.6, 0.4, 0.2, 0. ]])  # following step  (excluding way point (2.))
+    jac1 = ([[0.2, 0.4, 0.6, 0.8, 1.0 ],   # previous step  (including way point (2.))
+             [0.8, 0.6, 0.4, 0.2, 0.0 ]])  # following step  (excluding way point (2.))
 
     """
 
