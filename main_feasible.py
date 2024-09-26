@@ -32,3 +32,4 @@ fig, ax = plotting.new_world_fig(limits=par.world.limits, title='Multi-Starts')
 plotting.plot_img_patch_w_outlines(img=par.oc.img, limits=par.world.limits, ax=ax)
 for qq in q:
     plotting.plot_x_path(x=qq, r=par.robot.spheres_rad, ax=ax, marker='o', alpha=0.5, color='k')
+plotting.plt.show()
