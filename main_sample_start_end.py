@@ -18,3 +18,4 @@ plotting.plot_img_patch_w_outlines(img=par.oc.img, limits=par.world.limits, ax=a
 
 plotting.plot_circles(x=q[status == +1], r=radius, ax=ax, color='blue', alpha=0.5)
 plotting.plot_circles(x=q[status == -1], r=radius, ax=ax, color='red', alpha=0.5)
+plotting.plt.show()

@@ -67,3 +67,4 @@ for q in q_ms:
     plotting.plot_x_path(x=q, r=par.robot.spheres_rad, ax=ax, marker='o', alpha=0.5)
 
 plotting.plot_x_path(x=q_opt, r=par.robot.spheres_rad, ax=ax, marker='o', color='k')
+plotting.plt.show()
