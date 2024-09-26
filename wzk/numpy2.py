@@ -267,7 +267,7 @@ def __fill_index_with(idx, axis, shape, mode='slice'):
         idx_with_ = [slice(None) for _ in range(len(shape)-len(axis))]
 
     elif mode == 'orange':
-        idx_with_ = np.ogrid[*[range(s) for i, s in enumerate(shape) if i not in axis]]
+        idx_with_ = np.ogrid(*[range(s) for i, s in enumerate(shape) if i not in axis])
 
     else:
         raise ValueError(f"Unknown mode {mode}")
